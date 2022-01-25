@@ -1,0 +1,6 @@
+---
+
+ssh_passwordauthentication: 'no'
+# ssh_trusted_user_ca_keys:
+
+...

@@ -1,0 +1,26 @@
+---
+
+- name: Ensure PasswordAuthentication setting
+  ansible.builtin.lineinfile:
+    path:          /etc/ssh/sshd_config
+    backup:        true
+    search_string: 'PasswordAuthentication'
+    line:          "PasswordAuthentication {{ ssh_passwordauthentication }}"
+  notify: restart sshd
+
+- name: Ensure /etc/ssh/trusted-user-ca-keys.pem
+  ansible.builtin.copy:
+    dest: /etc/ssh/trusted-user-ca-keys.pem
+    content: "{{ ssh_trusted_user_ca_keys }}"
+    mode: "u+rw,g-wx,o-rwx"
+  when: ssh_trusted_user_ca_keys is defined and ssh_trusted_user_ca_keys
+
+- name: Ensure TrustedUserCAKeys
+  ansible.builtin.lineinfile:
+    path:          /etc/ssh/sshd_config
+    backup:        true
+    line:          TrustedUserCAKeys /etc/ssh/trusted-user-ca-keys.pem
+  when:   ssh_trusted_user_ca_keys is defined and ssh_trusted_user_ca_keys
+  notify: restart sshd
+
+...
