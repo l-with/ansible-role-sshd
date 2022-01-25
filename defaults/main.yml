@@ -1,6 +1,7 @@
 ---
 
 sshd_passwordauthentication: 'no'
+sshd_remove_authorized_keys: false
 # sshd_trusted_user_ca_keys:
 
 ...

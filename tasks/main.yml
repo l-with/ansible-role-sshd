@@ -23,4 +23,10 @@
   when:   sshd_trusted_user_ca_keys is defined and sshd_trusted_user_ca_keys
   notify: restart sshd
 
+- name: Ensure remove /root/.ssh/authorized_keys
+  ansible.builtin_file:
+    path:  /root/.ssh/authorized_keys
+    state: absent
+  when: sshd_remove_authorized_keys
+
 ...
