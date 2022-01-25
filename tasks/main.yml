@@ -24,7 +24,7 @@
   notify: restart sshd
 
 - name: Ensure remove /root/.ssh/authorized_keys
-  ansible.builtin_file:
+  ansible.builtin.file:
     path:  /root/.ssh/authorized_keys
     state: absent
   when: sshd_remove_authorized_keys
