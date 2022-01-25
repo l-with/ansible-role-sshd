@@ -1,8 +1,8 @@
 ---
 
 galaxy_info:
-  role_name: ssh
-  description: manage ssh configuration
+  role_name: sshd
+  description: manage sshd configuration
   author: l_with
   license: MIT
   min_ansible_version: '2.9'
