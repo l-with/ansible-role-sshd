@@ -15,7 +15,7 @@
     mode: "u+rw,g-wx,o-rwx"
   when: sshd_trusted_user_ca_keys is defined and sshd_trusted_user_ca_keys
 
-- name: Ensure TrustedUserCAKeys
+- name: Ensure TrustedUserCAKeys in /etc/ssh/sshd_config
   ansible.builtin.lineinfile:
     path:          /etc/ssh/sshd_config
     backup:        true
@@ -28,5 +28,15 @@
     path:  /root/.ssh/authorized_keys
     state: absent
   when: sshd_remove_authorized_keys
+
+- name: Ensure no includes in /etc/ssh/sshd_config
+  ansible.builtin.lineinfile:
+    path:   /etc/ssh/sshd_config
+    backup: true
+    regexp: '^\s*Include'
+    state:  absent
+  when:   sshd_no_includes
+  notify: restart sshd
+
 
 ...
