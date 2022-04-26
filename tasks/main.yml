@@ -35,7 +35,7 @@
     backup: true
     regexp: '^\s*Include'
     state:  absent
-  when:   sshd_no_includes
+  when:   sshd_remove_includes
   notify: restart sshd
 
 
